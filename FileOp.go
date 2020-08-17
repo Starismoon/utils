@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 )
-
+//获取指定路径下的文件夹
 func GetDir(dirpath string) ([]string,error) {
 	dirs:=make([]string,0)
 	dir,err:=ioutil.ReadDir(dirpath)
@@ -24,6 +24,7 @@ func GetDir(dirpath string) ([]string,error) {
 	}
 	return dirs,nil
 }
+//获取指定路径下的文件
 func GetFileList(dirpath string) ([]string,error) {
 	files:=make([]string,0)
 	dir,err:=ioutil.ReadDir(dirpath)
@@ -40,6 +41,7 @@ func GetFileList(dirpath string) ([]string,error) {
 	}
 	return files,nil
 }
+//判断文件是否存在
 func FileIsExisted(path string) bool {
 	_,err:=os.Stat(path)
 	if err!=nil {
@@ -50,7 +52,7 @@ func FileIsExisted(path string) bool {
 	}
 	return true
 }
-
+//复制文件夹
 func CopyDir(srcPath, desPath string) error {
 	//检查目录是否正确
 	if srcInfo, err := os.Stat(srcPath); err != nil {
@@ -99,7 +101,7 @@ func CopyDir(srcPath, desPath string) error {
 
 	return err
 }
-
+//复制文件
 func CopyFile(src, des string) (written int64, err error) {
 	srcFile, err := os.Open(src)
 	if err != nil {
@@ -120,7 +122,7 @@ func CopyFile(src, des string) (written int64, err error) {
 
 	return io.Copy(desFile, srcFile)
 }
-
+//创建文件夹
 func MakeDir(dir string) error {
 	if !FileIsExisted(dir) {
 		if err := os.MkdirAll(dir, 0777); err != nil { //os.ModePerm
